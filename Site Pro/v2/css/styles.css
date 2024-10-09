@@ -1,0 +1,62 @@
+
+*{
+
+}
+.active {
+    font-weight: bold;
+    color: red;
+}
+body{
+    margin: 0 auto;
+}
+header.header{
+    display: flex;
+    align-items: center;
+}
+header.header img{
+    width: 100px;
+    
+}
+section.top-page {
+
+    background-size: cover;
+    height: 80vh;
+}
+
+div.landing-page h1{
+    color: blue;
+}
+body {
+    background-image: url('../images/59b0887191ee1a27ee3d0aa085c5cf14.jpg');
+
+}
+p.menu a {
+    color: #fff;
+}
+
+#currentpage {
+    color:red;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+footer a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 10px;
+}
+footer a:hover {
+    text-decoration: underline;
+}
