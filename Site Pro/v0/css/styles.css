@@ -18,8 +18,15 @@ section.top-page {
     height: 80vh;
 }
 
-
-
+div.landing-page h1{
+    color: blue;
+}
+head.body {
+    background-image: url('../images/arriere plan.jpg');
+    background-size: cover; /* Ajuste l'image pour qu'elle couvre tout l'écran */
+    background-position: center; /* Centre l'image */
+    background-repeat: no-repeat; /* Empêche la répétition de l'image */
+}
 p.menu a {
     color: #fff;
 }
