@@ -11,6 +11,7 @@ header.header{
 }
 header.header img{
     width: 100px;
+    
 }
 section.top-page {
 
@@ -21,11 +22,9 @@ section.top-page {
 div.landing-page h1{
     color: blue;
 }
-head.body {
-    background-image: url('../images/arriere plan.jpg');
-    background-size: cover; /* Ajuste l'image pour qu'elle couvre tout l'écran */
-    background-position: center; /* Centre l'image */
-    background-repeat: no-repeat; /* Empêche la répétition de l'image */
+body {
+    background-image: url('../images/59b0887191ee1a27ee3d0aa085c5cf14.jpg');
+
 }
 p.menu a {
     color: #fff;
