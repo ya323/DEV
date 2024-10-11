@@ -2,10 +2,12 @@
 <a href="index.php?page=<?php echo $currentPageId; ?>&lang=fr">Français</a> |
 <a href="index.php?page=<?php echo $currentPageId; ?>&lang=en">English</a>
     <div class="landing-page">
-        <h1>Bienvenue à mon premier site professionnel</h1>
+        <h1>Welcome to my first professional website</h1>
         <h1>Yassir BENJANE</h1>
-        <h2>ÉLÈVE INGÉNIEUR GÉNÉRALISTE | IMT NORD EUROPE</h2>
+        <h2>GENERAL ENGINEERING STUDENT AT IMT NORD EUROPE</h2>
         
-        <p>Étant élève ingénieur en 3ème année à l’Institut Mines Télécom Nord d'Europe en Industrie et service. Sérieux et ouvert d’esprit. Dynamique et motivé, je suis à la recherche d’un stage PFE dans le domaine industriel (Supply chain / Production / Logistique) pour une durée de 6 mois à partir de mars 2025.</p>
+        <p>I'm an engineering student in my 3rd year at L'Institut Mines Télecom Nord d'Europe in Industry and Service. Serious and open-minded. 
+        Dynamic and motivated looking for a PFE internship in the industrial
+        field ( Supply chain / Production / Logistics ) for 6 MONTHS starting in March 2025.</p>
     </div>
 </section>

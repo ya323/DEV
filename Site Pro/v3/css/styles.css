@@ -27,7 +27,7 @@ div.landing-page h1{
     color: blue;
 }
 body {
-    background-image: url('../images/59b0887191ee1a27ee3d0aa085c5cf14.jpg');
+    background-image: url('../images/arriere plan cv.jpg');
 
 }
 p.menu a {
@@ -49,7 +49,7 @@ footer {
     
     text-align: center;
     padding: 10px 0px;
-    position: relative;
+    position: fixed;
     bottom: 0;
     width: 100%;
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
