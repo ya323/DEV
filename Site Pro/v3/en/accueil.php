@@ -1,12 +1,6 @@
-<section class="top-page">
-    <header class="header">
-        <img src="images/cv logo.jpg" alt="cv logo">
-        <?php
-        require_once('template_menu.php');
-        renderMenuToHTML('index');
-        ?>
-    </header>
 
+<a href="index.php?page=<?php echo $currentPageId; ?>&lang=fr">Français</a> |
+<a href="index.php?page=<?php echo $currentPageId; ?>&lang=en">English</a>
     <div class="landing-page">
         <h1>Bienvenue à mon premier site professionnel</h1>
         <h1>Yassir BENJANE</h1>

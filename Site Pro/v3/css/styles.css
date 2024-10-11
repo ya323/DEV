@@ -44,14 +44,17 @@ body {
     padding: 0;
 }
 footer {
-    background-color: #333;
-    color: white;
+    background-color: #e0e0e0;
+    color: #333;
+    
     text-align: center;
-    padding: 20px;
-    position: fixed;
+    padding: 10px 0px;
+    position: relative;
     bottom: 0;
     width: 100%;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
 }
+
 footer a {
     color: #fff;
     text-decoration: none;
