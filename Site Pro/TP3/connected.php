@@ -1,8 +1,9 @@
 <?php
-// On simule une base de données
+session_start(); // Démarre la session
+
+// Simuler une base de données
 $users = array(
-    // login => password
-    'yassir' => 'BENJANE',
+    'riri' => 'fifi',
     'yoda' => 'maitrejedi'
 );
 
@@ -10,15 +11,22 @@ $login = "anonymous";
 $errorText = "";
 $successfullyLogged = false;
 
-// Vérifier si les champs 'login' et 'password' ont été soumis via POST
+// Vérifier si les champs login et password existent
 if (isset($_POST['login']) && isset($_POST['password'])) {
     $tryLogin = $_POST['login'];
     $tryPwd = $_POST['password'];
 
-    // Si le login existe et que le mot de passe correspond
+    // Vérification des identifiants
     if (array_key_exists($tryLogin, $users) && $users[$tryLogin] == $tryPwd) {
         $successfullyLogged = true;
         $login = $tryLogin;
+
+        // Enregistrer le login dans la session
+        $_SESSION['login'] = $login;
+
+        // Rediriger l'utilisateur vers la page d'accueil ou une autre page
+        header("Location: welcome.php");
+        exit();
     } else {
         $errorText = "Erreur de login/password";
     }
@@ -26,13 +34,7 @@ if (isset($_POST['login']) && isset($_POST['password'])) {
     $errorText = "Merci d'utiliser le formulaire de login";
 }
 
-// Afficher les résultats
 if (!$successfullyLogged) {
     echo $errorText;
-} else {
-    echo "<h1>Bienvenu " . $login . "</h1>";
 }
 ?>
-
-    
-
