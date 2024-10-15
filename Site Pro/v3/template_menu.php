@@ -11,8 +11,8 @@ function renderMenuToHTML($currentPageId) {
     );
 
     // Génération du code HTML du menu
-    echo '<nav class="menu">';
-    echo '<ul>';
+    echo '<nav >';
+    echo '<ul class="menu">';
     
     foreach ($mymenu as $pageId => $pageParameters) {
         // Si la page actuelle est égale à la page du tableau, ajouter une classe active

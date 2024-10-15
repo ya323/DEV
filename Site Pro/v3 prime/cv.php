@@ -1,22 +1,12 @@
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CV Yassir Benjane</title>
-    <link rel="stylesheet" href="css/styles.css">
-</head>
-<body>
+<?php
+require_once('template_header.php');
+?>
     <header>
-        <nav>
-            <ul class="menu">
-                <li><a href="index.html">Accueil</a></li>
-                <li><a id="currentpage" href="cv.html">CV</a></li>
-                <li><a href="projets.html">Projets</a></li>
-                
-            </ul>
-        </nav>
+        <?php
+            require_once('template_menu.php');
+            renderMenuToHTML('CV');
+        ?>
     </header>
     <div class="cv-container">
         <!-- Colonne latérale -->
@@ -92,8 +82,8 @@
         </main>
     </div>
 
-    <footer>
-        <p>&copy; 2024 MonSiteWeb. Tous droits réservés.</p>
-    </footer>
+    <?php
+    require_once('template_footer.php');
+    ?>
 </body>
 </html>

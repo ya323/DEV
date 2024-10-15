@@ -1,65 +1,36 @@
 
-*{
-
-}
-.active {
-    font-weight: bold;
-    color: red;
-}
-body{
-    margin: 0 auto;
-}
-header.header{
-    display: flex;
-    align-items: center;
-}
-header.header img{
-    width: 100px;
-    
-}
-section.top-page {
-
-    background-size: cover;
-    height: 80vh;
-}
-
-div.landing-page h1{
-    color: blue;
-}
-body {
-    background-image: url('../images/arriere plan cv.jpg');
-
-}
-p.menu a {
-    color: #fff;
-}
-
-#currentpage {
-    color:red;
-}
-
 body {
     font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
     margin: 0;
     padding: 0;
 }
-footer {
-    background-color: #e0e0e0;
-    color: #333;
-    
-    text-align: center;
-    padding: 10px 0px;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+
+.cv-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr; /* Sidebar 1 part, Main content 2 parts */
+    gap: 20px;
+    margin: 40px auto;
+    max-width: 1200px;
 }
 
-footer a {
-    color: #fff;
-    text-decoration: none;
-    margin: 0 10px;
+.sidebar {
+    background-color: #f8f8f8;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-footer a:hover {
-    text-decoration: underline;
+
+.main-content {
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-photo {
+    width: 150px;
+    height: auto;
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto 20px;
 }
