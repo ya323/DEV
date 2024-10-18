@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS CRUD</title>
+    <link rel="stylesheet" href="style.css"> <!-- Lien vers le fichier CSS -->
+    
+</head>
+<body>
+    <h1>Gestion des Utilisateurs (CRUD)</h1>
+
+    <!-- Tableau pour afficher les utilisateurs -->
+    <table id="userTable">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Date de Naissance</th>
+                <th>Aime le cours Web</th>
+                <th>Remarques</th>
+                <th>CRUD</th>
+            </tr>
+        </thead>
+        <tbody id="userTableBody">
+            <!-- Les nouvelles lignes seront ajoutées ici -->
+        </tbody>
+    </table>
+
+    <!-- Formulaire pour ajouter un utilisateur -->
+    <form id="userForm">
+        <label for="nom">Nom* :</label>
+        <input type="text" id="nom" required>
+        <br><br>
+        <label for="prenom">Prénom :</label>
+        <input type="text" id="prenom">
+        <br><br>
+        <label for="dateNaissance">Date de Naissance :</label>
+        <input type="date" id="dateNaissance">
+        <br><br>
+        <label for="aimeWeb">Aime le cours Web :</label>
+        <input type="checkbox" id="aimeWeb">
+        <br><br>
+        <label for="remarques">Remarques :</label>
+        <textarea id="remarques"></textarea>
+        <br><br>
+        <button type="submit">Ajouter</button>
+        <p id="errorMessage" class="error"></p>
+    </form>
+
+    <script src="jsc.js"></script> <!-- Lien vers le fichier JavaScript -->
+</body>
+</html>
