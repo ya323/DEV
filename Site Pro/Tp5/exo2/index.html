@@ -32,14 +32,14 @@
     <h3 id="formTitle">Ajouter un utilisateur</h3>
     <form id="addUserForm">
         <input type="hidden" id="userId"> <!-- Champ caché pour stocker l'ID de l'utilisateur lors de la modification -->
-        <label>Nom: </label><input type="text" id="name" required><br>
-        <label>Email: </label><input type="email" id="email" required><br>
+        <label>Nom: </label><input type="text" id="name" ><br>
+        <label>Email: </label><input type="email" id="email" ><br>
         <button type="submit">Ajouter</button>
     </form>
 
     <script>
         $(document).ready(function() {
-            let isEditing = false; // Flag pour savoir si nous sommes en mode édition
+            let isEditingRow = null; // Stocker la ligne en cours d'édition
             let table = $('#usersTable').DataTable({
                 ajax: {
                     url: 'http://localhost/IDAW/DEV/Site%20Pro/TP4/exo5/users.php', // Met à jour avec le chemin correct de ton API
@@ -58,69 +58,97 @@
                         render: function(data, type, row) {
                             return `
                                 <button class="editBtn">Modifier</button>
+                                <button class="saveBtn" style="display:none;">Sauvegarder</button>
                                 <button class="deleteBtn">Supprimer</button>
+                                
                             `;
                         }
                     }
                 ]
             });
 
-            // Gérer la soumission du formulaire pour ajouter ou modifier un utilisateur
+            // Gérer la soumission du formulaire pour ajouter un utilisateur
             $('#addUserForm').on('submit', function(e) {
                 e.preventDefault();
-                let userId = $('#userId').val();
                 let name = $('#name').val();
                 let email = $('#email').val();
 
-                if (isEditing) {
-                    // Mode édition : envoyer une requête PUT pour mettre à jour l'utilisateur
-                    $.ajax({
-                        url: `http://localhost/IDAW/DEV/Site%20Pro/TP4/exo5/users.php?id=${userId}`,
-                        method: 'PUT',
-                        data: JSON.stringify({ id: userId, name: name, email: email }),  // Envoyer les données en JSON
-                        contentType: 'application/json',
-                        success: function(response) {
-                            table.ajax.reload(); // Recharger les données de la table
-                            alert('Utilisateur modifié avec succès');
-                            resetForm(); // Réinitialiser le formulaire après la modification
-                        },
-                        error: function(xhr, status, error) {
-                            console.log(xhr.responseText);
-                            alert("Erreur lors de la modification de l'utilisateur : " + xhr.status + " " + error);
-                        }
-                    });
-                } else {
-                    // Mode ajout : envoyer une requête POST pour ajouter un nouvel utilisateur
-                    $.ajax({
-                        url: 'http://localhost/IDAW/DEV/Site%20Pro/TP4/exo5/users.php',
-                        method: 'POST',
-                        data: JSON.stringify({ name: name, email: email }),
-                        contentType: 'application/json',
-                        success: function(response) {
-                            table.ajax.reload(); // Recharger les données de la table
-                            alert('Utilisateur ajouté avec succès');
-                        },
-                        error: function(xhr, status, error) {
-                            console.log(xhr.responseText);
-                            alert("Erreur lors de l'ajout de l'utilisateur : " + xhr.status + " " + error);
-                        }
-                    });
-                }
+                // Mode ajout : envoyer une requête POST pour ajouter un nouvel utilisateur
+                $.ajax({
+                    url: 'http://localhost/IDAW/DEV/Site%20Pro/TP4/exo5/users.php',
+                    method: 'POST',
+                    data: JSON.stringify({ name: name, email: email }),
+                    contentType: 'application/json',
+                    success: function(response) {
+                        table.ajax.reload(); // Recharger les données de la table
+                        alert('Utilisateur ajouté avec succès');
+                        resetForm();
+                    },
+                    error: function(xhr, status, error) {
+                        console.log(xhr.responseText);
+                        alert("Erreur lors de l'ajout de l'utilisateur : " + xhr.status + " " + error);
+                    }
+                });
             });
 
-            // Gérer le bouton "Modifier"
+            // Gérer le bouton "Modifier" directement dans le tableau
             $('#usersTable tbody').on('click', '.editBtn', function() {
-                let data = table.row($(this).parents('tr')).data();
-                $('#userId').val(data.id); // Préremplir l'ID de l'utilisateur
-                $('#name').val(data.name); // Préremplir le nom
-                $('#email').val(data.email); // Préremplir l'email
-                $('#formTitle').text('Modifier l\'utilisateur'); // Changer le titre du formulaire
-                isEditing = true; // Activer le mode édition
+                let row = $(this).closest('tr'); // Sélectionner la ligne parent
+                let data = table.row(row).data();
+
+                if (isEditingRow) {
+                    alert("Une autre ligne est déjà en cours de modification. Sauvegardez ou annulez les modifications.");
+                    return;
+                }
+
+                isEditingRow = row;
+
+                // Rendre les cellules de la ligne éditables
+                row.find('td:eq(1)').html(`<input type="text" value="${data.name}" class="edit-name">`);
+                row.find('td:eq(2)').html(`<input type="email" value="${data.email}" class="edit-email">`);
+
+                // Afficher le bouton "Sauvegarder" et cacher le bouton "Modifier"
+                row.find('.editBtn').hide();
+                row.find('.saveBtn').show();
+            });
+
+            // Gérer le bouton "Sauvegarder"
+            $('#usersTable tbody').on('click', '.saveBtn', function() {
+                let row = $(this).closest('tr'); // Sélectionner la ligne parent
+                let userId = row.find('td:eq(0)').text();
+                let newName = row.find('.edit-name').val();
+                let newEmail = row.find('.edit-email').val();
+
+                // Envoyer la mise à jour via AJAX
+                $.ajax({
+                    url: `http://localhost/IDAW/DEV/Site%20Pro/TP4/exo5/users.php?id=${userId}`,
+                    method: 'PUT',
+                    data: JSON.stringify({ id: userId, name: newName, email: newEmail }),
+                    contentType: 'application/json',
+                    success: function(response) {
+                        // Mettre à jour les cellules du tableau avec les nouvelles valeurs
+                        row.find('td:eq(1)').text(newName);
+                        row.find('td:eq(2)').text(newEmail);
+
+                        // Réinitialiser les boutons
+                        row.find('.editBtn').show();
+                        row.find('.saveBtn').hide();
+
+                        // Réinitialiser la ligne d'édition
+                        isEditingRow = null;
+                        alert('Utilisateur modifié avec succès.');
+                    },
+                    error: function(xhr, status, error) {
+                        console.log(xhr.responseText);
+                        alert("Erreur lors de la modification de l'utilisateur : " + xhr.status + " " + error);
+                    }
+                });
             });
 
             // Gérer le bouton "Supprimer"
             $('#usersTable tbody').on('click', '.deleteBtn', function() {
-                let data = table.row($(this).parents('tr')).data();
+                let row = $(this).closest('tr');
+                let data = table.row(row).data();
                 if (confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')) {
                     $.ajax({
                         url: `http://localhost/IDAW/DEV/Site%20Pro/TP4/exo5/users.php?id=${data.id}`,
@@ -139,11 +167,8 @@
 
             // Fonction pour réinitialiser le formulaire
             function resetForm() {
-                $('#userId').val('');
                 $('#name').val('');
                 $('#email').val('');
-                $('#formTitle').text('Ajouter un utilisateur'); // Remettre le titre du formulaire
-                isEditing = false; // Désactiver le mode édition
             }
         });
     </script>
